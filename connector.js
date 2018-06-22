@@ -1,7 +1,7 @@
 const jwtflow = require('salesforce-jwt');
 const got = require('got');
 
-var clientId = '{{salesforce-app-client-id}}';
+var consumerKey = '{{salesforce-consumer-key}}';
 
 var privateKey = `-----BEGIN RSA PRIVATE KEY-----
 {{private-key}}
@@ -9,7 +9,7 @@ var privateKey = `-----BEGIN RSA PRIVATE KEY-----
 
 exports.handler = function (context, event, callback) {
 
-  jwtflow.getToken(clientId, privateKey, '{{salesforce-user}}', function (error, token) {
+  jwtflow.getToken(consumerKey, privateKey, '{{salesforce-user}}', function (error, token) {
     // token will contain the token to use on SalesForce API.
     if (error) {
       console.error(error);

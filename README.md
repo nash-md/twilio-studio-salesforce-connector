@@ -9,7 +9,7 @@ In order to run the demo you will need to replace the following placeholders:
 
 The Salesforce user name
 
-- `{{salesforce-app-client-id}}`
+- `{{salesforce-consumer-key}}`
 
 The Connected App Client Id.
 
