@@ -1,9 +1,8 @@
 const jwtflow = require('salesforce-jwt');
 const got = require('got');
 
-var consumerKey = '{{salesforce-consumer-key}}';
-
-var privateKey = `-----BEGIN RSA PRIVATE KEY-----
+const consumerKey = '{{salesforce-consumer-key}}';
+const privateKey = `-----BEGIN RSA PRIVATE KEY-----
 {{private-key}}
 -----END RSA PRIVATE KEY-----`
 
