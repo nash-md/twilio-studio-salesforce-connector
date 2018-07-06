@@ -13,7 +13,8 @@ This application is provided as-is. Twilio does not officially support it.
 Open [Twilio Functions Configuration](https://www.twilio.com/console/runtime/functions/configure), click on the plus button and add two entries to the list
 
 - `got` version 8.3.1
-- `salesforce-jwt-bearer-token-flow` version 0.2.1, 
+- `form-data` version 2.3.2, 
+- `jsonwebtoken` version 8.3.0, 
 
 Afterwards create a new [Function](https://www.twilio.com/console/runtime/functions/manage), click on the plus button and start with a blank template. 
  
