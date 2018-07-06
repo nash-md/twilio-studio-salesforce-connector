@@ -1,45 +1,52 @@
-const jwtflow = require('salesforce-jwt');
+const jwt = require("salesforce-jwt-bearer-token-flow");
 const got = require('got');
 
-const consumerKey = '{{salesforce-consumer-key}}';
+const user = '{{salesforce-user}}';
+const clientId = '{{salesforce-consumer-key}}';
 const privateKey = `-----BEGIN RSA PRIVATE KEY-----
 {{private-key}}
------END RSA PRIVATE KEY-----`
+-----END RSA PRIVATE KEY-----`;
 
 exports.handler = function (context, event, callback) {
 
-  jwtflow.getToken(consumerKey, privateKey, '{{salesforce-user}}', function (error, token) {
-    // token will contain the token to use on SalesForce API.
+  jwt.getToken({
+    iss: clientId,
+    sub: user,
+    aud: 'https://login.salesforce.com',
+    privateKey: privateKey
+  }, function (error, token) {
+
     if (error) {
-      console.error(error);
+      return callback(error);
     }
 
     const options = {
-      Authorization: 'Bearer ' + token,
+      Authorization: 'Bearer ' + token.access_token,
       'Content-Type': 'application/json'
     };
 
-    got('https://{{salesforce-instace}}.salesforce.com/services/data/v41.0/query/', {
+    got(`${token.instance_url}/services/data/v41.0/query/`, {
       headers: options,
-      query: 'q=' + encodeURIComponent(`SELECT Name from Contact WHERE Phone = '${event.phoneNumber}'`)
+      query: 'q=' + encodeURIComponent(`SELECT Id, Name from Contact WHERE Phone = '${event.phoneNumber}'`);
     }).then(response => {
-        const attributes = JSON.parse(response.body)
+      const attributes = JSON.parse(response.body);
 
-        console.log(`found: ${attributes.records.length} records`)
+      console.log(`found: ${attributes.records.length} records`);
 
-        if (attributes.records.length !== 0) {
-          
-          callback(null, {
-            name: attributes.records[0].Name
-          });
+      if (attributes.records.length !== 0) {
 
-        } else {
-          callback(null, {});
-        }
-      }).catch(error => {
-        console.error(error);
-        callback(error);
-      })
+        callback(null, {
+          name: attributes.records[0].Name
+        });
+
+      } else {
+        callback(null, {});
+      }
+
+    }).catch(error => {
+      console.error(error);
+      callback(error);
+    })
 
   });
 

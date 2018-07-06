@@ -13,7 +13,7 @@ This application is provided as-is. Twilio does not officially support it.
 Open [Twilio Functions Configuration](https://www.twilio.com/console/runtime/functions/configure), click on the plus button and add two entries to the list
 
 - `got` version 8.3.1
-- `salesforce-jwt` version 0.1.0, 
+- `salesforce-jwt-bearer-token-flow` version 0.2.1, 
 
 Afterwards create a new [Function](https://www.twilio.com/console/runtime/functions/manage), click on the plus button and start with a blank template. 
  
@@ -21,26 +21,19 @@ In order to run the demo you will need to replace the following placeholders:
 
 - `{{salesforce-user}}`
 
-The Salesforce user name
+The Salesforce user name to impersonate.
 
 - `{{salesforce-consumer-key}}`
 
-The Connected App Client Id.
-
-- `{{salesforce-instace}}`
-
-The Salesforce instace is the database server from where you can have access to your organisation. Any environment will have a URL like https://xxxx.salesforce.com (example),
+The Salesforce Connected App Client Id.
 
 - `{{private-key}}`
 
-Your certificate private key. Used to sign the JWT token
-
-This application demonstrates Twilio automatic speech recognition with a voice call. With speech recognition you can detect the intent of a phone call quickly in real-time.
+Your certificate private key. Used to sign the JWT token.
 
 ## Questions?
 
 Message [mdamm@twilio.com](mailto:mdamm@twilio.com) 
-
 
 # License
 
