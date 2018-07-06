@@ -45,7 +45,7 @@ exports.handler = function(context, event, callback) {
         query:
           'q=' +
           encodeURIComponent(
-            `SELECT Id, Name from Contact WHERE Phone = '${event.phoneNumber}'`
+            `SELECT Id, Name from Contact WHERE Phone = '${event.from}'`
           )
       });
     })
